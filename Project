@@ -1,3 +1,10 @@
-print ('Hello')
-print('Hi Surya')
-print('Try'
+import mysql.connector
+mycon = mysql.connector.connect(host='localhost', user='root', passwd='passwd here', database='11b')
+if mycon.is_connected():
+    print('Connection established sucessfully.')
+else:
+    print('Connection not established.')
+cursor = mycon.cursor()
+##########################################################################################################
+cdatabase= "create database Project"
+cursor.execute(cdatabase)

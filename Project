@@ -8,3 +8,45 @@ cursor = mycon.cursor()
 ##########################################################################################################
 cdatabase= "create database Project"
 cursor.execute(cdatabase)
+def create_Table_EMP():
+    query='create table Employees(SNO int,CODE int primary key,Name varchar(35),Salary decimal(7,2),DOJ date)'
+    cursor.execute(query)
+def insert_records_into_table(n,a,b,c,d,e):
+    for i in range(n):
+        query="insert into Employees(%s,%s,%s,%s,%s)"
+        values=(a,b,c,d,e)
+        cursor.execute(query,values)
+    print("successfully added to table")
+def show_EMP_names():
+    query='select Name from Employees'
+    cursor.execute(query)
+    result=cursor.fetchall()
+    for row in result:
+        print(row)
+def show_Salary_EMP():
+    query='select Name,Salary from Employes'
+    cursor.execute(query)
+    result=cursor.fetchall()
+    for row in result:
+        print(row)
+def change_salary():
+    a = input('Enter the new salary:')
+    b = input('Enter the code:')
+    query = 'update Employees set salary=%s where CODE=%s'
+    values = (a, b)
+    cursor.execute(query, values)
+    con.commit()
+def change_position():
+    n = input('Enter the name of employee you want to change the position of:')
+    e = input('Enter new position :')
+    query = 'update Employees set position=%s where CODE=%s'
+    values = (n, e)
+    cursor.execute(query, values)
+    con.commit()
+
+
+print("Welcome to STOMPER Automobil Showroom ")
+n=input('Are you a customer or Admin :')
+if n=="customer" or n=="Customer":
+    print("Welcome to the showroom")
+elif n=="Admin" or n=="admin":

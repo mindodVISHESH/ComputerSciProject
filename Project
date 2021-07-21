@@ -1,5 +1,5 @@
 import mysql.connector
-mycon = mysql.connector.connect(host='localhost', user='root', passwd='passwd here', database='11b')
+mycon = mysql.connector.connect(host='localhost', user='root', passwd='ALIbinsalem034', database='Project')
 if mycon.is_connected():
     print('Connection established sucessfully.')
 else:
@@ -7,46 +7,144 @@ else:
 cursor = mycon.cursor()
 ##########################################################################################################
 cdatabase= "create database Project"
-cursor.execute(cdatabase)
+#cursor.execute(cdatabase)
+
+#Employees_Admin
 def create_Table_EMP():
-    query='create table Employees(SNO int,CODE int primary key,Name varchar(35),Salary decimal(7,2),DOJ date)'
+    query='create table Employees(SNO int,CODE int primary key,Name varchar(35),Salary int,DOJ varchar(30));'
     cursor.execute(query)
-def insert_records_into_table(n,a,b,c,d,e):
+def add_emp():
+    n=int(input('Enter the number of employees you want to enter:'))
     for i in range(n):
-        query="insert into Employees(%s,%s,%s,%s,%s)"
+        a=int(input('Enter the SNO:'))
+        b=int(input('Enter the code of employee:'))
+        c=input('Enter the full name:')
+        d=int(input('Enter the salary of employee:'))
+        e=input('Enter the date of joining(YYYY-MM-DD):')
+        query="insert into Employees(%s,%s,%s,%s,%s);"
         values=(a,b,c,d,e)
         cursor.execute(query,values)
-    print("successfully added to table")
+        print("successfully added to table")
 def show_EMP_names():
-    query='select Name from Employees'
+    query='select Name from Employees;'
     cursor.execute(query)
     result=cursor.fetchall()
     for row in result:
         print(row)
-def show_Salary_EMP():
-    query='select Name,Salary from Employes'
+def show_emp():
+    query='select * from Employes;'
     cursor.execute(query)
     result=cursor.fetchall()
     for row in result:
         print(row)
 def change_salary():
-    a = input('Enter the new salary:')
-    b = input('Enter the code:')
-    query = 'update Employees set salary=%s where CODE=%s'
+    a = int(input('Enter the new salary:'))
+    b = int(input('Enter the code:'))
+    query = 'update Employees set salary=%s where CODE=%s;'
     values = (a, b)
     cursor.execute(query, values)
-    con.commit()
+    mycon.commit()
 def change_position():
     n = input('Enter the name of employee you want to change the position of:')
-    e = input('Enter new position :')
-    query = 'update Employees set position=%s where CODE=%s'
+    e = input('Enter new code for position :')
+    query = 'update Employees set position=%s where CODE=%s;'
     values = (n, e)
     cursor.execute(query, values)
-    con.commit()
+    mycon.commit()
+def remove_emp():
+    a=int(input('Enter the Code of the employee you want to remove:'))
+    query = 'delete from Employees where CODE = %s;'
+    values = (a)
+    cursor.execute(query,values)
+    mycon.commit()
+
+#Customer_Table
+def create_Table_cars():
+    query='create table cars(CODE int primary key,Name varchar(35),Year int,Type char(3),Company varchar(30), Price int);'
+    #Typeofcar
+    #SUV,SED-sedan,SPT-sport
+    cursor.execute(query)
+def add_cars():
+    n=int(input('Enter the number of cars you want to enter:'))
+    for i in range(n):
+        a=int(input('Enter the CODE:'))
+        b=input('Enter the name of the car:')
+        c=int(input('Enter the year it was produced:'))
+        d=input('Enter the type of car(SUV or SED-sedan or SPT-sport):')
+        e=input('Enter the company of the car:')
+        f=int(input('Enter the price of car in DHS:'))
+        query="insert into cars values(%s,%s,%s,%s,%s,%s);"
+        values=(a,b,c,d,e,f)
+        cursor.execute(query,values)
+        print("successfully added to table")
+def show_cars():
+    query='select * from cars;'
+    cursor.execute(query)
+    result=cursor.fetchall()
+    for row in result:
+        print(row)
+def change_price():
+    s = input('Enter the CODE of car you want to change the price of:')
+    p = input('Enter new price of the car :')
+    query = 'update cars set CODE=%s where Price=%s;'
+    values = (s, p)
+    cursor.execute(query, values)
+    mycon.commit()
+def remove_car():
+    a=int(input('Enter the Code of the car you want to remove:'))
+    query = 'delete from cars where CODE = %s;'
+    values = (a)
+    cursor.execute(query,values)
+    mycon.commit()
+def Contact_Us():
+    a=int(input('Contact us by (1)Mail (2)Phone (3)Location\nEnter 1 or 2 or 3:\n'))
+    if a ==1:
+        print('This is our email:\nhelp@stomper.com')
+    elif a==2:
+        print('Call us on our toll free number:\n800-4357(HELP):\n')
+    elif a==3:
+        print('Visit us at:\n'
+              '107, Warehouse Road\n'
+              'Bussines Center\n'
+              'Dubai, UAE')
+    else:
+        print('Try again')
 
 
 print("Welcome to STOMPER Automobil Showroom ")
-n=input('Are you a customer or Admin :')
+n=input('Are you a customer or admin :')
 if n=="customer" or n=="Customer":
     print("Welcome to the showroom")
+    q=int(input('Please Enter\n(1)to view a list of cars available\n(2)to contact us:\n'))
+    if q==1:
+        show_cars()
+    if q==2:
+        Contact_Us()
 elif n=="Admin" or n=="admin":
+    print('These are the controls:')
+    w=int(input('Enter:\n(1)To manage the car list\n(2)To manage the employee list\n'))
+    if w==1:
+        e=int(input('Enter:\n(1)To See the list\n(2)To Add Cars\n(3)To Remove cars\n(4)To Change the price of a car\n'))
+        if e==1:
+            show_cars()
+        if e==2:
+            add_cars()
+        if e==3:
+            remove_car()
+        if e==4:
+            change_price()
+    if w==2:
+        r=int(input('Enter:\n(1)To see the list\n(2)To add employee\n(3)To change salary\n(4)To change Positon'
+                    '\n(5)To remove'))
+        if r==1:
+            show_emp()
+        if r==2:
+            add_emp()
+        if r==3:
+            change_salary()
+        if r==4:
+            change_position()
+        if r==5:
+            remove_emp()
+else:
+    print('Try again')

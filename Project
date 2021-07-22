@@ -86,8 +86,8 @@ def show_cars():
 def change_price():
     s = input('Enter the CODE of car you want to change the price of:')
     p = input('Enter new price of the car :')
-    query = 'update cars set CODE=%s where Price=%s;'
-    values = (s, p)
+    query = 'update cars set PRICE=%s where CODE=%s;'
+    values = (p, s)
     cursor.execute(query, values)
     mycon.commit()
 def remove_car():
@@ -121,30 +121,34 @@ if n=="customer" or n=="Customer":
     if q==2:
         Contact_Us()
 elif n=="Admin" or n=="admin":
-    print('These are the controls:')
-    w=int(input('Enter:\n(1)To manage the car list\n(2)To manage the employee list\n'))
-    if w==1:
-        e=int(input('Enter:\n(1)To See the list\n(2)To Add Cars\n(3)To Remove cars\n(4)To Change the price of a car\n'))
-        if e==1:
-            show_cars()
-        if e==2:
-            add_cars()
-        if e==3:
-            remove_car()
-        if e==4:
-            change_price()
-    if w==2:
-        r=int(input('Enter:\n(1)To see the list\n(2)To add employee\n(3)To change salary\n(4)To change Positon'
+    n = input('Enter your password:')
+    if n=='#password' or n='#PASSWORD':
+        print('These are the controls:')
+        w=int(input('Enter:\n(1)To manage the car list\n(2)To manage the employee list\n'))
+        if w==1:
+            e=int(input('Enter:\n(1)To See the list\n(2)To Add Cars\n(3)To Remove cars\n(4)To Change the price of a car\n'))
+            if e==1:
+                show_cars()
+            if e==2:
+                add_cars()
+            if e==3:
+                remove_car()
+            if e==4:
+                change_price()
+        if w==2:
+            r=int(input('Enter:\n(1)To see the list\n(2)To add employee\n(3)To change salary\n(4)To change Positon'
                     '\n(5)To remove'))
-        if r==1:
-            show_emp()
-        if r==2:
-            add_emp()
-        if r==3:
-            change_salary()
-        if r==4:
-            change_position()
-        if r==5:
-            remove_emp()
+            if r==1:
+                show_emp()
+            if r==2:
+                add_emp()
+            if r==3:
+                change_salary()
+            if r==4:
+                change_position()
+            if r==5:
+                remove_emp()
+    else:
+        print('Incorrect password')
 else:
     print('Try again')

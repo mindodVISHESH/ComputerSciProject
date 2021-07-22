@@ -11,19 +11,20 @@ cdatabase= "create database Project"
 
 #Employees_Admin
 def create_Table_EMP():
-    query='create table Employees(SNO int,CODE int primary key,Name varchar(35),Salary int,DOJ varchar(30));'
+    query='create table Employees(CODE int primary key,Position varchar(10),Name varchar(35),Salary int,DOJ date);'
     cursor.execute(query)
 def add_emp():
     n=int(input('Enter the number of employees you want to enter:'))
     for i in range(n):
-        a=int(input('Enter the SNO:'))
-        b=int(input('Enter the code of employee:'))
+        a=int(input('Enter the CODE:'))
+        b=input('Enter the position:')
         c=input('Enter the full name:')
-        d=int(input('Enter the salary of employee:'))
+        d=int(input('Enter the salary:'))
         e=input('Enter the date of joining(YYYY-MM-DD):')
-        query="insert into Employees(%s,%s,%s,%s,%s);"
-        values=(a,b,c,d,e)
+        query="insert into Employees values(%s,%s,%s,%s,%s);"
+        values=(a,b,c,d,e,)
         cursor.execute(query,values)
+        mycon.commit()
         print("successfully added to table")
 def show_EMP_names():
     query='select Name from Employees;'
@@ -32,7 +33,7 @@ def show_EMP_names():
     for row in result:
         print(row)
 def show_emp():
-    query='select * from Employes;'
+    query='select * from Employees;'
     cursor.execute(query)
     result=cursor.fetchall()
     for row in result:
@@ -45,16 +46,16 @@ def change_salary():
     cursor.execute(query, values)
     mycon.commit()
 def change_position():
-    n = input('Enter the name of employee you want to change the position of:')
-    e = input('Enter new code for position :')
-    query = 'update Employees set position=%s where CODE=%s;'
+    n = input('Enter the code of the employee you want to change the position of:')
+    e = input('Enter new position for position :')
+    query = 'update Employees set CODE=%s where CODE=%s;'
     values = (n, e)
     cursor.execute(query, values)
     mycon.commit()
 def remove_emp():
     a=int(input('Enter the Code of the employee you want to remove:'))
     query = 'delete from Employees where CODE = %s;'
-    values = (a)
+    values = (a,)
     cursor.execute(query,values)
     mycon.commit()
 
@@ -73,9 +74,10 @@ def add_cars():
         d=input('Enter the type of car(SUV or SED-sedan or SPT-sport):')
         e=input('Enter the company of the car:')
         f=int(input('Enter the price of car in DHS:'))
-        query="insert into cars values(%s,%s,%s,%s,%s,%s);"
+        query="insert into cars() values(%s,%s,%s,%s,%s,%s);"
         values=(a,b,c,d,e,f)
         cursor.execute(query,values)
+        mycon.commit()
         print("successfully added to table")
 def show_cars():
     query='select * from cars;'
@@ -93,7 +95,7 @@ def change_price():
 def remove_car():
     a=int(input('Enter the Code of the car you want to remove:'))
     query = 'delete from cars where CODE = %s;'
-    values = (a)
+    values = (a,)
     cursor.execute(query,values)
     mycon.commit()
 def Contact_Us():
@@ -110,44 +112,53 @@ def Contact_Us():
     else:
         print('Try again')
 
-
 print("Welcome to STOMPER Automobil Showroom ")
 n=input('Are you a customer or admin :')
 if n=="customer" or n=="Customer":
     print("Welcome to the showroom")
-    q=int(input('Please Enter\n(1)to view a list of cars available\n(2)to contact us:\n'))
-    if q==1:
-        show_cars()
-    if q==2:
-        Contact_Us()
+    t=1
+    while t==1:
+        q=int(input('Please Enter\n(1)to view a list of cars available\n(2)to contact us\n(3)To Exit:\n'))
+        if q==1:
+            show_cars()
+        elif q==2:
+            Contact_Us()
+        elif q==3:
+            quit()
+        else:
+            print('Try again')
 elif n=="Admin" or n=="admin":
     n = input('Enter your password:')
-    if n=='#password' or n='#PASSWORD':
-        print('These are the controls:')
-        w=int(input('Enter:\n(1)To manage the car list\n(2)To manage the employee list\n'))
-        if w==1:
-            e=int(input('Enter:\n(1)To See the list\n(2)To Add Cars\n(3)To Remove cars\n(4)To Change the price of a car\n'))
-            if e==1:
-                show_cars()
-            if e==2:
-                add_cars()
-            if e==3:
-                remove_car()
-            if e==4:
-                change_price()
-        if w==2:
-            r=int(input('Enter:\n(1)To see the list\n(2)To add employee\n(3)To change salary\n(4)To change Positon'
-                    '\n(5)To remove'))
-            if r==1:
-                show_emp()
-            if r==2:
-                add_emp()
-            if r==3:
-                change_salary()
-            if r==4:
-                change_position()
-            if r==5:
-                remove_emp()
+    if n=='#password' or n=='#PASSWORD':
+            print('These are the controls:')
+            w=int(input('Enter:\n(1)To manage the car list\n(2)To manage the employee list\n'))
+            if w==1:
+                f=1
+                while f==1:
+                    e=int(input('Enter:\n(1)To See the list\n(2)To Add Cars\n(3)To Remove cars\n(4)To Change the price of a car\n'))
+                    if e==1:
+                        show_cars()
+                    if e==2:
+                        add_cars()
+                    if e==3:
+                        remove_car()
+                    if e==4:
+                        change_price()
+            if w==2:
+                m=1
+                while m==1:
+                    r=int(input('Enter:\n(1)To see the list\n(2)To add employee\n(3)To change salary\n(4)To change Positon'
+                        '\n(5)To remove'))
+                    if r==1:
+                        show_emp()
+                    if r==2:
+                        add_emp()
+                    if r==3:
+                        change_salary()
+                    if r==4:
+                        change_position()
+                    if r==5:
+                        remove_emp()
     else:
         print('Incorrect password')
 else:

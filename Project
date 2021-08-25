@@ -26,7 +26,7 @@ def add_emp():
         cursor.execute(query,values)
         mycon.commit()
         print("successfully added to table")
-def show_EMP_names():
+def show_ALL_EMP_names():
     query='select Name from Employees;'
     cursor.execute(query)
     result=cursor.fetchall()
@@ -40,7 +40,7 @@ def show_emp():
         print(row)
 def change_salary():
     a = int(input('Enter the new salary:'))
-    b = int(input('Enter the code:'))
+    b = int(input('Enter the code of the employee you want to change the position of:'))
     query = 'update Employees set salary=%s where CODE=%s;'
     values = (a, b)
     cursor.execute(query, values)
@@ -74,7 +74,7 @@ def add_cars():
         d=input('Enter the type of car(SUV or SED-sedan or SPT-sport):')
         e=input('Enter the company of the car:')
         f=int(input('Enter the price of car in DHS:'))
-        query="insert into cars() values(%s,%s,%s,%s,%s,%s);"
+        query="insert into cars values(%s,%s,%s,%s,%s,%s);"
         values=(a,b,c,d,e,f)
         cursor.execute(query,values)
         mycon.commit()

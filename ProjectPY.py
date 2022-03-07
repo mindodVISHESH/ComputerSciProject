@@ -117,7 +117,7 @@ def Contact_Us():
 #admin
 def admin():
     n = input('Enter your password:')
-    if n == 'passwd' or n == 'PASSWD':
+    if n == 'passwd' or n == 'Passwd':
         a()
     else:
         print('Incorrect password')

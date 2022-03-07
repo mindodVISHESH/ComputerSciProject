@@ -1,5 +1,5 @@
 import mysql.connector
-mycon = mysql.connector.connect(host='localhost', user='root', passwd='ALIbinsalem034', database='Project')
+mycon = mysql.connector.connect(host='localhost', user='root', passwd='ALIbinsalem', database='Project')
 if mycon.is_connected():
     print('Connection established sucessfully.')
 else:
@@ -117,7 +117,7 @@ def Contact_Us():
 #admin
 def admin():
     n = input('Enter your password:')
-    if n == '#password' or n == '#PASSWORD':
+    if n == 'passwd' or n == 'PASSWD':
         a()
     else:
         print('Incorrect password')

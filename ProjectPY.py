@@ -118,6 +118,33 @@ def remove_car():
     cursor.execute(query,values)
     mycon.commit()
     show_cars()
+def Sortby():
+    a=int(input('Enter (1)To sort by year\n(2)To sort by Increasing Price\n(3)To sort by Decresing Price\n(4)To sort by type of  car(SED,SUV,SPT)'))
+    if a==1:
+        query = 'Select * from cars order by years;'
+        cursor.execute(query)
+    elif a==2:
+        query = 'Select * from cars order by Price ASC;'
+        cursor.execute(query)
+    elif a==3:
+        query = 'Select * from cars order by Price DSC;'
+        cursor.execute(query)
+    elif a==4:
+        query = 'Select * from cars order by Type;'
+        cursor.execute(query)
+def Filterby():
+    a=int(input('Enter (1)To Filter by Year (2)To filter by Type'))
+    if a == 1:
+        s=input('Enter Year of car you are looking for (2019,2020)')
+        query = 'Select * from cars where Year=%s'
+        values = (s,)
+        cursor.execute(query,values)
+    elif a == 2:
+        s = input('Enter Type of car you are looking for (SUV,SED,SPT)')
+        l=s.upper()
+        query = 'Select * from cars where Type=%s'
+        values = (l,)
+        cursor.execute(query,values)
 def Contact_Us():
     t=1
     while t==1:
@@ -210,9 +237,10 @@ def control():
 
 print("Welcome to STOMPER Automobil Showroom ")
 n=input('Are you a customer or admin :')
-if n=="customer" or n=="Customer":
+l=n.lower()
+if l=="customer":
     customer()
-elif n=="Admin" or n=="admin":
+elif l=="admin":
     admin()
 else:
     print('Try again')

@@ -39,6 +39,7 @@ def Add_Emp():
         cursor.execute(query,values)
         mycon.commit()
         print("successfully added to table")
+    Show_Emp()
 
 #To Remove a Employee
 def Remove_Emp():
@@ -47,6 +48,7 @@ def Remove_Emp():
     values = (a,)
     cursor.execute(query,values)
     mycon.commit()
+    Show_Emp()
 
 #To Change Salary of Employee
 def Change_Salary():
@@ -56,6 +58,7 @@ def Change_Salary():
     values = (a, b)
     cursor.execute(query, values)
     mycon.commit()
+    Show_Emp()
 
 #To Change Position of Employee
 def Change_Position():
@@ -65,6 +68,7 @@ def Change_Position():
     values = (n, e)
     cursor.execute(query, values)
     mycon.commit()
+    Show_Emp()
 
 #To Show Cars Available for Sale
 def Show_Cars():
@@ -84,7 +88,7 @@ def Add_Cars():
         d=input('Enter the type of car(SUV or SED-sedan or SPT-sport):')
         e=input('Enter the company of the car:')
         f=int(input('Enter the price of car in DHS:'))
-        g=int(input('Enter the stock of cas:'))
+        g=int(input('Enter the stock of car:'))
         h=input('Enter the color of car')
         query="insert into cars values(%s,%s,%s,%s,%s,%s,%s,%s);"
         values=(a,b,c,d,e,f,g,h)

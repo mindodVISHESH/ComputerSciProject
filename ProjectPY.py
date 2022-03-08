@@ -252,21 +252,23 @@ def emp():
     m = 1
     while m == 1:
         r = int(
-            input('Enter:\n(1)To see the list\n(2)To add employee\n(3)To change salary\n(4)To change Positon'
-                  '\n(5)To remove\n(6)To go back\n(7)To exit:\n'))
+            input('Enter:\n(1)To see the list\n(2)To see names of enployes\n(3)To add employee\n(4)To change salary\n(5)To change Positon'
+                  '\n(6)To remove\n(7)To go back\n(8)To exit:\n'))
         if r == 1:
             show_emp()
         elif r == 2:
-            add_emp()
+            show_ALL_EMP_names()
         elif r == 3:
-            change_salary()
+            add_emp()
         elif r == 4:
-            change_position()
+            change_salary()
         elif r == 5:
-            remove_emp()
+            change_position()
         elif r == 6:
-            a()
+            remove_emp()
         elif r == 7:
+            a()
+        elif r == 8:
             exit()
         else:
             print('Invalid Input Detected. Please Try Again')

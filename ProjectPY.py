@@ -119,32 +119,50 @@ def remove_car():
     mycon.commit()
     show_cars()
 def Sortby():
-    a=int(input('Enter (1)To sort by year\n(2)To sort by Increasing Price\n(3)To sort by Decresing Price\n(4)To sort by type of  car(SED,SUV,SPT)'))
+    a=int(input('Enter\n(1)To sort by year\n(2)To sort by Increasing Price\n(3)To sort by Decresing Price\n(4)To sort by type of  car(SED,SUV,SPT)\n'))
     if a==1:
-        query = 'Select * from cars order by years;'
+        query = 'Select * from cars order by Year;'
         cursor.execute(query)
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
     elif a==2:
         query = 'Select * from cars order by Price ASC;'
         cursor.execute(query)
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
     elif a==3:
-        query = 'Select * from cars order by Price DSC;'
+        query = 'Select * from cars order by Price DESC;'
         cursor.execute(query)
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
     elif a==4:
         query = 'Select * from cars order by Type;'
         cursor.execute(query)
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
 def Filterby():
-    a=int(input('Enter (1)To Filter by Year (2)To filter by Type'))
+    a=int(input('Enter (1)To Filter by Year (2)To filter by Type\n'))
     if a == 1:
         s=input('Enter Year of car you are looking for (2019,2020)')
         query = 'Select * from cars where Year=%s'
         values = (s,)
         cursor.execute(query,values)
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
     elif a == 2:
         s = input('Enter Type of car you are looking for (SUV,SED,SPT)')
         l=s.upper()
         query = 'Select * from cars where Type=%s'
         values = (l,)
         cursor.execute(query,values)
+        result = cursor.fetchall()
+        for row in result:
+            print(row)
 def Contact_Us():
     t=1
     while t==1:
@@ -225,12 +243,16 @@ def customer():
 def control():
     t = 1
     while t == 1:
-        q = int(input('Please Enter\n(1)to view a list of cars available\n(2)to contact us\n(3)To Exit:\n'))
+        q = int(input('Please Enter\n(1)to view a list of cars available\n(2)To Sort the list\n(3)To Filter the list\n(4)to contact us\n(5)To Exit:\n'))
         if q == 1:
             show_cars()
         elif q == 2:
-            Contact_Us()
+            Sortby()
         elif q == 3:
+            Filterby()
+        elif q == 4:
+            Contact_Us()
+        elif q == 5:
             quit()
         else:
             print('Try again')

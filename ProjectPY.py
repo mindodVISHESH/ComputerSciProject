@@ -73,11 +73,14 @@ def add_cars():
         d=input('Enter the type of car(SUV or SED-sedan or SPT-sport):')
         e=input('Enter the company of the car:')
         f=int(input('Enter the price of car in DHS:'))
-        query="insert into cars values(%s,%s,%s,%s,%s,%s);"
-        values=(a,b,c,d,e,f)
+        g=int(input('Enter the stock of cas:'))
+        h=input('Enter the color of car')
+        query="insert into cars values(%s,%s,%s,%s,%s,%s,%s,%s);"
+        values=(a,b,c,d,e,f,g,h)
         cursor.execute(query,values)
         mycon.commit()
         print("successfully added to table")
+    show_cars()
 def show_cars():
     query='select * from cars;'
     cursor.execute(query)
@@ -91,6 +94,7 @@ def change_price():
     values = (p, s)
     cursor.execute(query, values)
     mycon.commit()
+    show_cars()
 def change_Color():
     s = input('Enter the CODE of the car you want to change the color of:')
     p = input('Enter new color of the car:')
@@ -98,7 +102,7 @@ def change_Color():
     values = (p,s)
     cursor.execute(query, values)
     mycon.commit()
-
+    show_cars()
 def change_Stock():
     s = input('Enter the CODE of the car you want to change the stock of:')
     p = input('Enter new stock of the car:')
@@ -106,13 +110,14 @@ def change_Stock():
     values = (p, s)
     cursor.execute(query, values)
     mycon.commit()
-
+    show_cars()
 def remove_car():
     a=int(input('Enter the Code of the car you want to remove:'))
     query = 'delete from cars where CODE = %s;'
     values = (a,)
     cursor.execute(query,values)
     mycon.commit()
+    show_cars()
 def Contact_Us():
     t=1
     while t==1:

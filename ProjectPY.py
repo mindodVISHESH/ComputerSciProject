@@ -182,20 +182,29 @@ def Contact_Us():
             print('Try again')
 #admin
 def admin():
-    n = input('Enter your password:')
-    if n == 'passwd' or n == 'Passwd':
-        a()
-    else:
-        print('Incorrect password')
+    t=0
+    while t<3:
+        n = input('Enter your password:')
+        if n == 'passwd' or n == 'Passwd':
+            a()
+        else:
+            t=t+1
+            print('Incorrect password. Please Try Again')
+    print('Too many attempts. Please try again after some time.')
 def a():
     print('These are the controls:')
-    w = int(input('Enter:\n(1)To manage the car list\n(2)To manage the employee list\n(3)To Exit\n'))
+    w = int(input('Enter:\n(1)To manage the car list\n(2)To manage the employee list\n(4)To go to Customer View\n(3)To Exit\n'))
     if w == 1:
         car()
     elif w == 2:
         emp()
+    elif w==4:
+        customer()
     elif w == 3:
         exit()
+    else:
+        print('Invalid Input Detected. Please Try Again')
+        a()
 def car():
      f = 1
      while f == 1:
@@ -204,20 +213,22 @@ def car():
              '(7)To go back\n(8)To exit:\n'))
          if e == 1:
              show_cars()
-         if e == 2:
+         elif e == 2:
              add_cars()
-         if e == 3:
+         elif e == 3:
              remove_car()
-         if e == 4:
+         elif e == 4:
              change_price()
-         if e==5:
+         elif e==5:
             change_Stock()
-         if e==6:
+         elif e==6:
              change_Color()
-         if e == 7:
+         elif e == 7:
              a()
-         if e == 8:
+         elif e == 8:
              exit()
+         else:
+             print('Invalid Input Detected. Please Try Agian')
 def emp():
     m = 1
     while m == 1:
@@ -226,18 +237,21 @@ def emp():
                   '\n(5)To remove\n(6)To go back\n(7)To exit:\n'))
         if r == 1:
             show_emp()
-        if r == 2:
+        elif r == 2:
             add_emp()
-        if r == 3:
+        elif r == 3:
             change_salary()
-        if r == 4:
+        elif r == 4:
             change_position()
-        if r == 5:
+        elif r == 5:
             remove_emp()
-        if r == 6:
+        elif r == 6:
             a()
-        if r == 7:
+        elif r == 7:
             exit()
+        else:
+            print('Invalid Input Detected. Please Try Again')
+            emp()
 #customer
 def customer():
     print("Welcome to the showroom")
@@ -257,14 +271,18 @@ def control():
         elif q == 5:
             quit()
         else:
-            print('Try again')
+            print('Invalid Input Please Try Again')
 
-print("Welcome to STOMPER Automobil Showroom ")
-n=input('Are you a customer or admin :')
-l=n.lower()
-if l=="customer":
-    customer()
-elif l=="admin":
-    admin()
-else:
-    print('Try again')
+def start():
+    print("Welcome to STOMPER Automobil Showroom ")
+    n=input('Are you a customer or admin :')
+    l=n.lower()
+    if l=="customer":
+        customer()
+    elif l=="admin":
+        admin()
+    else:
+        print('Invalid Input Detected. Please Try again')
+        start()
+
+start()

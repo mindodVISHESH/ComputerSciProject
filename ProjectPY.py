@@ -85,12 +85,28 @@ def show_cars():
     for row in result:
         print(row)
 def change_price():
-    s = input('Enter the CODE of car you want to change the price of:')
+    s = input('Enter the CODE of the car you want to change the price of:')
     p = input('Enter new price of the car :')
     query = 'update cars set PRICE=%s where CODE=%s;'
     values = (p, s)
     cursor.execute(query, values)
     mycon.commit()
+def change_Color():
+    s = input('Enter the CODE of the car you want to change the color of:')
+    p = input('Enter new color of the car:')
+    query = 'update cars set Color=%s where CODE=%s;'
+    values = (p,s)
+    cursor.execute(query, values)
+    mycon.commit()
+
+def change_Stock():
+    s = input('Enter the CODE of the car you want to change the stock of:')
+    p = input('Enter new stock of the car:')
+    query = 'update cars set Stock=%s where CODE=%s;'
+    values = (p, s)
+    cursor.execute(query, values)
+    mycon.commit()
+
 def remove_car():
     a=int(input('Enter the Code of the car you want to remove:'))
     query = 'delete from cars where CODE = %s;'
@@ -132,7 +148,8 @@ def car():
      f = 1
      while f == 1:
          e = int(input(
-             'Enter:\n(1)To See the list\n(2)To Add Cars\n(3)To Remove cars\n(4)To Change the price of a car\n(5)To go back\n(6)To exit:\n'))
+             'Enter:\n(1)To See the list\n(2)To Add Cars\n(3)To Remove cars\n(4)To Change the price of a car\n(5)To Change Stock of the car\n(6)To Change the Color of the car\n'
+             '(7)To go back\n(8)To exit:\n'))
          if e == 1:
              show_cars()
          if e == 2:
@@ -141,9 +158,13 @@ def car():
              remove_car()
          if e == 4:
              change_price()
-         if e == 5:
+         if e==5:
+            change_Stock()
+         if e==6:
+             change_Color()
+         if e == 7:
              a()
-         if e == 6:
+         if e == 8:
              exit()
 def emp():
     m = 1

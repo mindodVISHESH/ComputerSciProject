@@ -1,7 +1,7 @@
 import mysql.connector
 mycon = mysql.connector.connect(host='localhost', user='root', passwd='ALIbinsalem', database='Project')
 if mycon.is_connected():
-    print('Connection established sucessfully.')
+    print('Connection established successfully.')
 else:
     print('Connection not established.')
 cursor = mycon.cursor()
@@ -89,7 +89,7 @@ def Add_Cars():
         e=input('Enter the company of the car:')
         f=int(input('Enter the price of car in DHS:'))
         g=int(input('Enter the stock of car:'))
-        h=input('Enter the color of car')
+        h=input('Enter the color of car: ')
         query="insert into cars values(%s,%s,%s,%s,%s,%s,%s,%s);"
         values=(a,b,c,d,e,f,g,h)
         cursor.execute(query,values)
@@ -138,7 +138,7 @@ def Change_Stock():
 
 #To Sort the Cars Available for Sale
 def Sortby():
-    a=int(input('Enter\n(1)To sort by year\n(2)To sort by Increasing Price\n(3)To sort by Decresing Price\n(4)To sort by type of  car(SED,SUV,SPT)\n'))
+    a=int(input('Enter\n(1)To sort by year\n(2)To sort by Increasing Price\n(3)To sort by Decreasing Price\n(4)To sort by type of  car(SED,SUV,SPT)\n'))
     if a==1:
         query = 'Select * from cars order by Year;'
         cursor.execute(query)
@@ -197,7 +197,7 @@ def Contact_Us():
         elif a==3:
             print('Visit us at:\n'
                 '107, Warehouse Road\n'
-                'Bussines Center\n'
+                'Business Center\n'
                 'Dubai, UAE')
         elif a==4:
             Cust_Options()
@@ -286,7 +286,7 @@ def Emp_Options():
     m = 1
     while m == 1:
         r = int(
-            input('Enter:\n(1)To see the list\n(2)To see names of enployes\n(3)To add employee\n(4)To change salary\n(5)To change Positon'
+            input('Enter:\n(1)To see the list\n(2)To see names of employees\n(3)To add employee\n(4)To change salary\n(5)To change position'
                   '\n(6)To remove\n(7)To go back\n(8)To exit:\n'))
         if r == 1:
             Show_Emp()

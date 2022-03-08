@@ -9,7 +9,7 @@ cursor = mycon.cursor()
 cdatabase= "create database Project"
 #cursor.execute(cdatabase)
 
-#Employees_Admin
+
 def create_Table_EMP():
     query='create table Employees(CODE int primary key,Position varchar(10),Name varchar(35),Salary int,DOJ date);'
     cursor.execute(query)
@@ -27,6 +27,7 @@ def add_emp():
         cursor.execute(query,values)
         mycon.commit()
         print("successfully added to table")
+
 
 def show_ALL_EMP_names():
     query='select Name from Employees;'
@@ -293,15 +294,19 @@ def control():
             print('Invalid Input Please Try Again')
 
 def start():
-    print("Welcome to STOMPER Automobil Showroom ")
-    n=input('Are you a customer or admin :')
-    l=n.lower()
-    if l=="customer":
-        customer()
-    elif l=="admin":
-        admin()
-    else:
-        print('Invalid Input Detected. Please Try again')
+    try:
+        print("Welcome to STOMPER Automobil Showroom ")
+        n=input('Are you a customer or admin :')
+        l=n.lower()
+        if l=="customer":
+            customer()
+        elif l=="admin":
+            admin()
+        else:
+            print('Invalid Input Detected. Please Try again')
+            start()
+    except:
+        print('Error Occured Please Try Agian.')
         start()
 
 start()

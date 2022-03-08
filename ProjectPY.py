@@ -189,11 +189,13 @@ def admin():
         print('Incorrect password')
 def a():
     print('These are the controls:')
-    w = int(input('Enter:\n(1)To manage the car list\n(2)To manage the employee list\n'))
+    w = int(input('Enter:\n(1)To manage the car list\n(2)To manage the employee list\n(3)To Exit\n'))
     if w == 1:
         car()
-    if w==2:
+    elif w == 2:
         emp()
+    elif w == 3:
+        exit()
 def car():
      f = 1
      while f == 1:

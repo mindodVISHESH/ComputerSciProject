@@ -9,10 +9,19 @@ cursor = mycon.cursor()
 cdatabase= "create database Project"
 #cursor.execute(cdatabase)
 
-
-def create_Table_EMP():
-    query='create table Employees(CODE int primary key,Position varchar(10),Name varchar(35),Salary int,DOJ date);'
+def show_emp():
+    query='select * from Employees;'
     cursor.execute(query)
+    result=cursor.fetchall()
+    for row in result:
+        print(row)
+
+def show_ALL_EMP_names():
+    query='select Name from Employees;'
+    cursor.execute(query)
+    result=cursor.fetchall()
+    for row in result:
+        print(row)
 
 def add_emp():
     n=int(input('Enter the number of employees you want to enter:'))
@@ -28,37 +37,6 @@ def add_emp():
         mycon.commit()
         print("successfully added to table")
 
-
-def show_ALL_EMP_names():
-    query='select Name from Employees;'
-    cursor.execute(query)
-    result=cursor.fetchall()
-    for row in result:
-        print(row)
-
-def show_emp():
-    query='select * from Employees;'
-    cursor.execute(query)
-    result=cursor.fetchall()
-    for row in result:
-        print(row)
-
-def change_salary():
-    a = int(input('Enter the new salary:'))
-    b = int(input('Enter the code of the employee you want to change the salary of:'))
-    query = 'update Employees set salary=%s where CODE=%s;'
-    values = (a, b)
-    cursor.execute(query, values)
-    mycon.commit()
-
-def change_position():
-    n = input('Enter new position :')
-    e = input('Enter the code of the employee you want to change the position of :')
-    query = 'update Employees set Position=%s where CODE=%s;'
-    values = (n, e)
-    cursor.execute(query, values)
-    mycon.commit()
-
 def remove_emp():
     a=int(input('Enter the Code of the employee you want to remove:'))
     query = 'delete from Employees where CODE = %s;'
@@ -66,13 +44,30 @@ def remove_emp():
     cursor.execute(query,values)
     mycon.commit()
 
-def create_Table_cars():
-    query='create table cars(CODE int primary key,Name varchar(35),Year int,Type char(3),Company varchar(30), Price int);'
-    #Typeofcar
-    #SUV,SED-sedan,SPT-sport
-    cursor.execute(query)
+def Change_Salary():
+    a = int(input('Enter the new salary:'))
+    b = int(input('Enter the code of the employee you want to change the salary of:'))
+    query = 'update Employees set salary=%s where CODE=%s;'
+    values = (a, b)
+    cursor.execute(query, values)
+    mycon.commit()
 
-def add_cars():
+def Change_Position():
+    n = input('Enter new position :')
+    e = input('Enter the code of the employee you want to change the position of :')
+    query = 'update Employees set Position=%s where CODE=%s;'
+    values = (n, e)
+    cursor.execute(query, values)
+    mycon.commit()
+
+def Show_Cars():
+    query='select * from cars;'
+    cursor.execute(query)
+    result=cursor.fetchall()
+    for row in result:
+        print(row)
+
+def Add_Cars():
     n=int(input('Enter the number of cars you want to enter:'))
     for i in range(n):
         a=int(input('Enter the CODE:'))
@@ -88,49 +83,42 @@ def add_cars():
         cursor.execute(query,values)
         mycon.commit()
         print("successfully added to table")
-    show_cars()
+    Show_Cars()
 
-def show_cars():
-    query='select * from cars;'
-    cursor.execute(query)
-    result=cursor.fetchall()
-    for row in result:
-        print(row)
+def Remove_Car():
+    a=int(input('Enter the Code of the car you want to remove:'))
+    query = 'delete from cars where CODE = %s;'
+    values = (a,)
+    cursor.execute(query,values)
+    mycon.commit()
+    Show_Cars()
 
-def change_price():
+def Change_price():
     s = input('Enter the CODE of the car you want to change the price of:')
     p = input('Enter new price of the car :')
     query = 'update cars set PRICE=%s where CODE=%s;'
     values = (p, s)
     cursor.execute(query, values)
     mycon.commit()
-    show_cars()
+    Show_Cars()
 
-def change_Color():
+def Change_Color():
     s = input('Enter the CODE of the car you want to change the color of:')
     p = input('Enter new color of the car:')
     query = 'update cars set Color=%s where CODE=%s;'
     values = (p,s)
     cursor.execute(query, values)
     mycon.commit()
-    show_cars()
+    Show_Cars()
 
-def change_Stock():
+def Change_Stock():
     s = input('Enter the CODE of the car you want to change the stock of:')
     p = input('Enter new stock of the car:')
     query = 'update cars set Stock=%s where CODE=%s;'
     values = (p, s)
     cursor.execute(query, values)
     mycon.commit()
-    show_cars()
-
-def remove_car():
-    a=int(input('Enter the Code of the car you want to remove:'))
-    query = 'delete from cars where CODE = %s;'
-    values = (a,)
-    cursor.execute(query,values)
-    mycon.commit()
-    show_cars()
+    Show_Cars()
 
 def Sortby():
     a=int(input('Enter\n(1)To sort by year\n(2)To sort by Increasing Price\n(3)To sort by Decresing Price\n(4)To sort by type of  car(SED,SUV,SPT)\n'))
@@ -193,62 +181,83 @@ def Contact_Us():
                 'Bussines Center\n'
                 'Dubai, UAE')
         elif a==4:
-            control()
+            Cust_Options()
         else:
             print('Try again')
 
-def admin():
+def Admin():
     t=0
     while t<3:
         n = input('Enter your password:')
         if n == 'passwd' or n == 'Passwd':
-            a()
+            Admin_Controls()
         else:
             t=t+1
             print('Incorrect password. Please Try Again')
     print('Too many attempts. Please try again after some time.')
 
-def a():
+def Admin_Controls():
     print('These are the controls:')
     w = int(input('Enter:\n(1)To manage the car list\n(2)To manage the employee list\n(4)To go to Customer View\n(3)To Exit\n'))
     if w == 1:
-        car()
+        Car_Options()
     elif w == 2:
-        emp()
+        Emp_Options()
     elif w==4:
-        customer()
+        Customer()
     elif w == 3:
         exit()
     else:
         print('Invalid Input Detected. Please Try Again')
-        a()
+        Admin_Controls()
 
-def car():
-     f = 1
-     while f == 1:
-         e = int(input(
-             'Enter:\n(1)To See the list\n(2)To Add Cars\n(3)To Remove cars\n(4)To Change the price of a car\n(5)To Change Stock of the car\n(6)To Change the Color of the car\n'
-             '(7)To go back\n(8)To exit:\n'))
-         if e == 1:
-             show_cars()
-         elif e == 2:
-             add_cars()
-         elif e == 3:
-             remove_car()
-         elif e == 4:
-             change_price()
-         elif e==5:
-            change_Stock()
-         elif e==6:
-             change_Color()
-         elif e == 7:
-             a()
-         elif e == 8:
-             exit()
-         else:
-             print('Invalid Input Detected. Please Try Agian')
+def Customer():
+    print("Welcome to the showroom")
+    Cust_Options()
 
-def emp():
+def Cust_Options():
+    t = 1
+    while t == 1:
+        q = int(input('Please Enter\n(1)to view a list of cars available\n(2)To Sort the list\n(3)To Filter the list\n'
+                      '(4)to contact us\n(5)To Exit:\n'))
+        if q == 1:
+            Show_Cars()
+        elif q == 2:
+            Sortby()
+        elif q == 3:
+            Filterby()
+        elif q == 4:
+            Contact_Us()
+        elif q == 5:
+            quit()
+        else:
+            print('Invalid Input Please Try Again')
+
+def Car_Options():
+    f = 1
+    while f == 1:
+        e = int(input('Enter:\n(1)To See the list\n(2)To Add Cars\n(3)To Remove cars\n(4)To Change the price of a car\n'
+                      '(5)To Change Stock of the car\n(6)To Change the Color of the car\n(7)To go back\n(8)To exit:\n'))
+        if e == 1:
+            Show_Cars()
+        elif e == 2:
+            Add_Cars()
+        elif e == 3:
+            Remove_Car()
+        elif e == 4:
+            Change_price()
+        elif e == 5:
+            Change_Stock()
+        elif e == 6:
+            Change_Color()
+        elif e == 7:
+            Admin_Controls()
+        elif e == 8:
+            exit()
+        else:
+            print('Invalid Input Detected. Please Try Agian')
+
+def Emp_Options():
     m = 1
     while m == 1:
         r = int(
@@ -261,55 +270,34 @@ def emp():
         elif r == 3:
             add_emp()
         elif r == 4:
-            change_salary()
+            Change_Salary()
         elif r == 5:
-            change_position()
+            Change_Position()
         elif r == 6:
             remove_emp()
         elif r == 7:
-            a()
+            Admin_Controls()
         elif r == 8:
             exit()
         else:
             print('Invalid Input Detected. Please Try Again')
-            emp()
+            Emp_Options()
 
-def customer():
-    print("Welcome to the showroom")
-    control()
-
-def control():
-    t = 1
-    while t == 1:
-        q = int(input('Please Enter\n(1)to view a list of cars available\n(2)To Sort the list\n(3)To Filter the list\n(4)to contact us\n(5)To Exit:\n'))
-        if q == 1:
-            show_cars()
-        elif q == 2:
-            Sortby()
-        elif q == 3:
-            Filterby()
-        elif q == 4:
-            Contact_Us()
-        elif q == 5:
-            quit()
-        else:
-            print('Invalid Input Please Try Again')
-
-def start():
+def Start():
     try:
         print("Welcome to STOMPER Automobil Showroom ")
         n=input('Are you a customer or admin :')
         l=n.lower()
         if l=="customer":
-            customer()
+            Customer()
         elif l=="admin":
-            admin()
+            Admin()
         else:
             print('Invalid Input Detected. Please Try again')
-            start()
+            Start()
     except:
         print('Error Occured Please Try Agian.')
-        start()
+        Start()
 
-start()
+Start()
 
